@@ -1,5 +1,5 @@
-import app from "./app.js";
-import "./config/database.js";
+import app from "./app";
+import "./config/database";
 
 // Server is listening
 app.listen(app.get('port'), () => {

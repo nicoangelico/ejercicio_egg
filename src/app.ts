@@ -1,9 +1,20 @@
 
 import express from "express";
-import config from "./config/config.js";
+import { Request, Response } from 'express';
+import config from "./config/config";
+import authRoutes from "./routes/auth";
+import userRoutes from "./routes/users";
+import { User } from './models/User';
 
-import authRoutes from "./routes/auth.js";
-import userRoutes from "./routes/users.js";
+//???
+declare global {
+  namespace Express {
+    interface Request {
+      user: User,
+      authData: any
+    }
+  }
+}
 
 //Init
 const app = express()
@@ -19,7 +30,7 @@ app.use(express.urlencoded({ extended: false })) // for parsing application/x-ww
 app.use(authRoutes)
 app.use(userRoutes)
 
-app.use((req, res) => {
+app.use((req: Request, res: Response) => {
   res.sendStatus(404);
 });
 
