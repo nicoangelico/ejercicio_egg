@@ -12,7 +12,7 @@ export interface User extends mongoose.Document {
   password: string;
   last_login: Date;
   sons: any[];
-  father: string;
+  father: mongoose.Schema.Types.ObjectId;
   encryptPassword: (password: string) => string;
   matchPassword: (password: string) => boolean;
 };

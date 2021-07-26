@@ -29,11 +29,12 @@ class UsersController {
   public async getSons (req: Request, res: Response) {
     const user = req.user;
     if (user.sons.length > 0) {
-      let sons = [];
-      for (let index = 0; index < user.sons.length; index++) {
-        let userSon = await UserModel.findById(user.sons[index]);
-        sons.push(userSon);
-      }
+      // let sons = [];
+      // for (let index = 0; index < user.sons.length; index++) {
+      //   let userSon = await UserModel.findById(user.sons[index]);
+      //   sons.push(userSon);
+      // }
+      const sons: User[] = await UserModel.find({ father: user._id}).limit(10);
       res.json({ sons })
     } else {
       res.send('No tiene hijos');
